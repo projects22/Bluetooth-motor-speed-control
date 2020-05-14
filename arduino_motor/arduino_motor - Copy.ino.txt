@@ -1,0 +1,70 @@
+/*
+ * Android to Arduino
+ * by moty22.co.uk
+ * 26/4/20
+ *  
+*/
+
+byte inB, inA;         //
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+    // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+//  delay(100);
+
+    //PWM Timer0
+//OCR0A = 64;
+//TCCR0A = _BV(COM0A1) | _BV(COM0B1) | _BV(WGM01) | _BV(WGM00);  //output in phase, fast PWM mode
+//TCCR0B = _BV(CS00); // 16MHz/256 = 64KHz
+//pinMode(6, OUTPUT);
+//pinMode(5, OUTPUT);
+
+    //timer2 settings
+//  OCR2A = 127;  //50% duty cycle 
+//  TCCR2A = 0b1000011;  //toggle output, fast PWM mode
+//  TCCR2B = 0b1100;  //   fast PWM mode, prescale 1:64
+//  pinMode(11, OUTPUT);
+  
+    //baud rate=9600
+//  UCSR0A = (1<<U2X0);   //fast rate
+//  UBRR0H = 0;
+//  UBRR0L = 207;
+//  UCSR0B = (1<<RXEN0)|(1<<TXEN0); //rx and tx enabled    
+
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  
+
+ //       delay(10000);
+           
+        if (Serial.available() > 1) {
+   //    inByte = analogRead(A0) / 4;
+       inA=Serial.read();
+       inB=Serial.read();
+         Serial.write(inA);
+         Serial.write(inB);
+   //     }
+  //        OCR0B=Serial.read();
+   //       OCR0A = analogRead(A0) / 4; 
+    //      OCR2A = inByte;
+  //        inByte +=5;
+  //        if (inByte > 240){inByte=0;}
+          analogWrite(10, inA*2);
+          analogWrite(11, inB*2);
+ 
+             delay(50);      
+ //            Serial.readBytes(outByte, 2);        
+//          PORTB = inByte; //update digital outputs 8-11
+
+       }
+         //check bytes received
+//  if( (UCSR0A & (1<<RXC0)) ) { OCR2A= UDR0;}
+//  delay(100);
+ // if( (UCSR0A & (1<<RXC0)) ) {outB = UDR0;}    
+}
+
+
+
